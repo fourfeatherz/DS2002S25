@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block title %}Chatbot{% endblock %}
+
+{% block content %}
+<h1>Chat with the FlaskBot</h1>
+
+<!-- Clear Chat Button -->
+<form action="/clear" method="get" style="margin-bottom: 10px;">
+    <button type="submit">🧹 Clear Chat</button>
+</form>
+
+<!-- Chat Bubble History -->
+<div class="chat-container" id="chat-container">
+    {% for entry in history %}
+        <div class="bubble user">You: {{ entry.user }}</div>
+        <div class="bubble bot">Bot: {{ entry.bot }}</div>
+    {% endfor %}
+</div>
+
+<!-- User Input -->
+<form method="post" onsubmit="showLoading()">
+    <input type="text" name="message" placeholder="Ask something wise..." required>
+    <button type="submit">Send</button>
+</form>
+
+<!-- Bot Thinking Indicator -->
+<div id="loading" style="display: none;">🤖 Thinking...</div>
+
+<!-- Styles -->
+<style>
+    .chat-container {
+        max-height: 400px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 1em;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+    }
+
+    .bubble {
+        max-width: 70%;
+        padding: 10px;
+        border-radius: 10px;
+        line-height: 1.4;
+    }
+
+    .user {
+        background-color: #d1e7dd;
+        align-self: flex-end;
+        margin-left: auto;
+        text-align: right;
+    }
+
+    .bot {
+        background-color: #f8d7da;
+        align-self: flex-start;
+        margin-right: auto;
+    }
+
+    input[type="text"] {
+        padding: 10px;
+        width: 75%;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    button {
+        padding: 10px 15px;
+        margin-left: 10px;
+        background-color: #1976d2;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #155ab6;
+    }
+
+    h1 {
+        margin-bottom: 10px;
+    }
+</style>
+
+<!-- Scripts -->
+<script>
+    function showLoading() {
+        document.getElementById("loading").style.display = "block";
+    }
+
+    // Scroll to bottom on load
+    window.onload = function () {
+        var container = document.getElementById("chat-container");
+        container.scrollTop = container.scrollHeight;
+    };
+</script>
+
+{% endblock %}
