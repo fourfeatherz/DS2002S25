@@ -3,8 +3,8 @@ from discord.ext import commands
 import requests
 
 # --- SETTINGS ---
-GROQ_API_KEY = "your-groq-api-key"  # <<<<< Replace with your real Groq API key
-DISCORD_BOT_TOKEN = "your-discord-bot-token"  # <<<<< Replace with your real Discord Bot token
+GROQ_API_KEY = ""  # <<<<< Replace with your real Groq API key
+DISCORD_BOT_TOKEN = ""  # <<<<< Replace with your real Discord Bot token
 
 # --- BOT SETUP ---
 intents = discord.Intents.default()
